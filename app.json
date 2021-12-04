@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "example-qr-reader",
-    "slug": "example-qr-reader",
+    "name": "qr-reader-example",
+    "slug": "qr-reader-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -1,70 +1,22 @@
-import React from "react";
-
-import {
-  Text,
-  Button,
-  HStack,
-  Image,
-  Center,
-  Heading,
-  Switch,
-  useColorMode,
-  NativeBaseProvider,
-  extendTheme,
-  VStack,
-  Code,
-} from "native-base";
-
-// Define the config
-const config = {
-  useSystemColorMode: false,
-  initialColorMode: "dark",
-};
-
-// extend the theme
-export const theme = extendTheme({ config });
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Basket, Home, Scanner } from './src/screens';
+import { NativeBaseProvider } from 'native-base';
+import { RootNavigationProps } from './src/Navigation';
 
 export default function App() {
+  const Stack = createNativeStackNavigator<RootNavigationProps>();
+
   return (
     <NativeBaseProvider>
-      <Center
-        _dark={{ bg: "blueGray.900" }}
-        _light={{ bg: "blueGray.50" }}
-        px={4}
-        flex={1}
-      >
-        <VStack space={5} alignItems="center">
-        <Image source={require('./assets/xcoobee-bee.png')} style = {{height: 150, width: 150, resizeMode : 'stretch',}} />
-          <Heading size="lg">Welcome to XcooBee QR Reader</Heading>
-          <HStack space={2} alignItems="center">
-            <Text>Edit</Text>
-            <Code>App.tsx</Code>
-            <Text>and save to reload.</Text>
-          </HStack>
-          
-            <Button size="lg" onPress={() => console.log("hello world")}>Scan QR</Button>
-          
-          <ToggleDarkMode />
-        </VStack>
-      </Center>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName={'Home'}>
+          <Stack.Screen name="Home" component={Home}/>
+          <Stack.Screen name="Scanner" component={Scanner}/>
+          <Stack.Screen name="Basket" component={Basket}/>
+        </Stack.Navigator>
+      </NavigationContainer>
     </NativeBaseProvider>
-  );
-}
-
-// Color Switch Component
-function ToggleDarkMode() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  return (
-    <HStack space={2} alignItems="center">
-      <Text>Dark</Text>
-      <Switch
-        isChecked={colorMode === "light" ? true : false}
-        onToggle={toggleColorMode}
-        aria-label={
-          colorMode === "light" ? "switch to dark mode" : "switch to light mode"
-        }
-      />
-      <Text>Light</Text>
-    </HStack>
   );
 }
