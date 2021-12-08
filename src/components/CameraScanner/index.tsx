@@ -15,6 +15,7 @@ export const CameraScanner: React.FC<Props> = ({
 }) => {
   const [hasPermission, setHasPermission] = useState<boolean>(false);
   const [scanned, setScanned] = useState<boolean>(false);
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -25,7 +26,23 @@ export const CameraScanner: React.FC<Props> = ({
 
   const handleBarCodeScanned = useCallback(({ data }) => {
     setScanned(onDataScanned(data) ?? false);
+
+    return () => console.log('reload');
   }, [onDataScanned]);
+
+  useEffect(() => {
+    if (!scanned) {
+      return;
+    }
+
+    if (timerId !== null) {
+      clearTimeout(timerId);
+    }
+
+    setTimerId(setTimeout(() => {
+      setScanned(false);
+    }, 1000));
+  }, [scanned]);
 
   if (!hasPermission) {
     return (
