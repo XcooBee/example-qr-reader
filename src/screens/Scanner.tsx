@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useCallback, useLayoutEffect } from 'react';
 import { Buffer } from 'buffer';
 import { Path } from 'path-parser';
-import { View } from 'native-base';
-import { CameraScanner } from '../components';
+import { Button, IconButton, View } from 'native-base';
+import { BasketIcon, CameraScanner } from '../components';
 import { SecurePayItem } from '../models';
+import { useBasket } from '../hooks';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { RootNavigationProps } from '../Navigation';
 
 enum UrlParams {
   CAMPAIGN_REF = 'campaignRef',
@@ -15,6 +18,23 @@ const securePayUrl = 'https://app.xcoobee.net/securePay/';
 const path = new Path(`:${UrlParams.CAMPAIGN_REF}/:${UrlParams.FORM_REF}?:${UrlParams.DATA}`);
 
 export const Scanner: React.FC = () => {
+  const basket = useBasket();
+  const navigation = useNavigation<NavigationProp<RootNavigationProps>>();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <BasketIcon
+          badge={basket.items.length}
+          onPress={() => navigation.navigate('Basket')}
+        />
+      ),
+    });
+  }, [navigation, basket]);
+
+  const scanCallback = useCallback((scannedItems: SecurePayItem[]) => {
+    scannedItems.forEach((value) => basket.addItem(value));
+  }, [basket]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -38,7 +58,7 @@ export const Scanner: React.FC = () => {
           // Map all data items.
           const secPayItems = decodedData.map((el) => SecurePayItem.fromData(campaignRef, formRef, el));
 
-          console.log('Parsed Data', secPayItems);
+          scanCallback(secPayItems);
 
           return true;
         }}

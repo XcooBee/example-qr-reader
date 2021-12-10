@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Text, View } from 'native-base';
+import { Text, View } from 'native-base';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
-import { ScannerOverlay } from '../ScannerOverlay';
+import { ScannerOverlay } from './ScannerOverlay';
 
 type Props = {
   disabled?: boolean;
@@ -53,7 +53,7 @@ export const CameraScanner: React.FC<Props> = ({
   }
 
   return (
-    <View style={{flex: 1,}}>
+    <View style={{ flex: 1, }}>
       <BarCodeScanner
         style={StyleSheet.absoluteFillObject}
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
