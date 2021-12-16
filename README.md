@@ -1,5 +1,14 @@
 # Example QR Reader Mobile App
 This repo shows you an example application to interpret and use XcooBee based QR codes.
+This is only showing high level implementation and should not be used for production directly without revisions.
+
+All code is delivered as is under the Apache 2.0 license
+
+Here are a few things you can practice on:
+- you do not allow repeated scans
+- make the shopping cart scrollable
+- add delete option
+- feel free to update packages and submit a PR if things are outdated
 
 It has multiple features including a shopping cart element where you can scan multipe Xcoobee Smart-QR codes and add products to your cart.
 
@@ -32,4 +41,10 @@ you will have a
 ## To run on device via Expo-Go
 
 -  run: `yarn start`
+
+## Example QR Codes
+
+Example QR codes are found in the `exampleQRs` directory.
+
+
 
