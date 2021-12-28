@@ -34,6 +34,8 @@ export const Scanner: React.FC = () => {
 
   const scanCallback = useCallback((scannedItems: SecurePayItem[]) => {
     scannedItems.forEach((value) => basket.addItem(value));
+
+    navigation.navigate('Basket');
   }, [basket]);
 
   return (
