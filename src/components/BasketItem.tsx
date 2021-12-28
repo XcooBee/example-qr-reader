@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableHighlight } from 'react-native';
+import { TouchableHighlight, TouchableOpacity } from 'react-native';
 import { Column, Icon, Row, Text, View } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { SecurePayItem } from '../models';
@@ -31,13 +31,13 @@ export const BasketItem: React.FC<Props> = ({ item, quantity , onChange, onRemov
             <View style={{
               justifyContent: 'center',
             }}>
-              <TouchableHighlight onPress={onRemove}>
+              <TouchableOpacity onPress={onRemove}>
                 <Icon
                   as={Ionicons}
                   name="close-circle"
                   size={5}
                 />
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
             <View style={{
               flex: 1,
@@ -71,14 +71,14 @@ export const BasketItem: React.FC<Props> = ({ item, quantity , onChange, onRemov
           padding: 5,
           backgroundColor: Colors.brand,
         }}>
-          <TouchableHighlight onPress={() => onChange(quantity + 1)}>
+          <TouchableOpacity onPress={() => onChange(quantity + 1)}>
             <Icon
               as={Ionicons}
               name="add-circle"
               color="white"
               size={5}
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
           <Text style={{
             marginVertical: 5,
             textAlign: 'center',
@@ -86,14 +86,14 @@ export const BasketItem: React.FC<Props> = ({ item, quantity , onChange, onRemov
           }}>
             {quantity}
           </Text>
-          <TouchableHighlight onPress={() => onChange(quantity - 1)}>
+          <TouchableOpacity onPress={() => onChange(quantity - 1)}>
             <Icon
               as={Ionicons}
               name="remove-circle"
               color="white"
               size={5}
             />
-          </TouchableHighlight>
+          </TouchableOpacity>
         </View>
       </Row>
     </View>

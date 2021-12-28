@@ -1,5 +1,5 @@
 import React from 'react';
-import { Column, Row, Text, View } from 'native-base';
+import { Column, Image, Row, Text, View } from 'native-base';
 import { useBasket } from '../hooks';
 import { BasketItem } from '../components';
 import { Colors } from '../utils';
@@ -11,6 +11,7 @@ export const Basket: React.FC = () => {
     <View>
       <Row style={{
         padding: 20,
+        alignItems: 'center'
       }}>
         <View style={{
           flex: 1,
@@ -28,26 +29,32 @@ export const Basket: React.FC = () => {
             </Text>
           </Column>
         </View>
-        <View style={{
-          flex: 0,
-          width: 80,
-          height: 80,
-          backgroundColor: 'grey'
-        }}/>
+        <Image source={require('../../assets/xcoobee-bee.png')}
+               style={{ height: 50, width: 50, resizeMode: 'stretch', }}
+               alt="XcooBee Logo"/>
       </Row>
-      <Text>Pay To: ~xcoobee</Text>
-      <Text>XcooBee</Text>
+      <Text style={{
+        fontSize: 12,
+        fontWeight: '500',
+        textAlign: 'center',
+      }}>
+        Pay To: ~xcoobee
+      </Text>
+      <Text style={{
+        fontSize: 18,
+        fontWeight: '500',
+        textAlign: 'center',
+      }}>
+        XcooBee
+      </Text>
 
-      {basket.items.map((e) => (
+      {basket.items.map((e, index) => (
         <BasketItem
           item={e}
           quantity={1}
           onChange={(qty) => {
-
           }}
-          onRemove={() => {
-
-          }}
+          onRemove={() => basket.removeItem(index)}
         />
       ))}
     </View>

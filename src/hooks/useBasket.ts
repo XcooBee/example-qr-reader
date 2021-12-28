@@ -1,9 +1,11 @@
+import { useCallback, useContext } from 'react';
+import _ from 'lodash';
 import { SecurePayItem } from '../models';
 import { BasketContext, BasketContextProps } from '../context';
-import { useCallback, useContext } from 'react';
 
 export type Basket = Pick<BasketContextProps, 'campaignRef' | 'formRef' | 'items'> & {
   addItem: (value: SecurePayItem) => void,
+  removeItem: (index: number) => void,
   toTotal: () => string,
   toTax: () => string,
 }
@@ -30,6 +32,13 @@ export const useBasket = (): Basket => {
     }
   }, [items]);
 
+  const removeItem = useCallback((index: number) => {
+    let newItems = _.remove(items, (e, i) => (i != index));
+    console.log(index, newItems);
+
+    setItems(newItems);
+  }, [items]);
+
   const getTotal = useCallback(() => {
     return items.reduce((prev, curr) => prev + curr.amount, 0.0);
   }, [items]);
@@ -51,6 +60,7 @@ export const useBasket = (): Basket => {
     formRef,
     items: items,
     addItem,
+    removeItem,
     toTotal,
     toTax,
   };
