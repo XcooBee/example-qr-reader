@@ -5,8 +5,12 @@
   "author": "XcooBee Team",
   "license": "Apache-2.0",
   "keywords": [
-    "XcooBee","QR","Scanner","expo","example"
-  ],  
+    "XcooBee",
+    "QR",
+    "Scanner",
+    "expo",
+    "example"
+  ],
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",

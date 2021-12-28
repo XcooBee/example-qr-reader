@@ -1,14 +1,17 @@
 import React from 'react';
-import { Column, Image, Row, Text, View } from 'native-base';
+import { Button, Column, Image, Row, ScrollView, Text, View } from 'native-base';
 import { useBasket } from '../hooks';
 import { BasketItem } from '../components';
 import { Colors } from '../utils';
+import { SafeAreaView } from 'react-native';
 
 export const Basket: React.FC = () => {
   const basket = useBasket();
 
   return (
-    <View>
+    <View style={{
+      flex: 1,
+    }}>
       <Row style={{
         padding: 20,
         alignItems: 'center'
@@ -48,15 +51,40 @@ export const Basket: React.FC = () => {
         XcooBee
       </Text>
 
-      {basket.items.map((e, index) => (
-        <BasketItem
-          item={e}
-          quantity={1}
-          onChange={(qty) => {
-          }}
-          onRemove={() => basket.removeItem(index)}
-        />
-      ))}
+      <ScrollView style={{
+        flex: 1,
+      }}>
+        {basket.items.map((e, index) => (
+          <BasketItem
+            key={`item_${index}`}
+            item={e}
+            quantity={1}
+            onChange={(qty) => {
+            }}
+            onRemove={() => basket.removeItem(index)}
+          />
+        ))}
+      </ScrollView>
+      <View style={{
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        right: 0,
+      }}>
+        <SafeAreaView>
+          <Button
+            onPress={() => {
+            }}
+            backgroundColor={'yellow.500'}
+          >
+            <Text style={{
+              fontSize: 18,
+            }}>
+              Checkout
+            </Text>
+          </Button>
+        </SafeAreaView>
+      </View>
     </View>
   );
 };

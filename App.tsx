@@ -1,10 +1,10 @@
 import React from 'react';
+import { NativeBaseProvider } from 'native-base';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Basket, Home, Scanner } from './src/screens';
-import { NativeBaseProvider } from 'native-base';
 import { RootNavigationProps } from './src/Navigation';
-import { BasketContext, BasketProvider } from './src/context';
+import { BasketProvider } from './src/context';
 
 export default function App() {
   const Stack = createNativeStackNavigator<RootNavigationProps>();
